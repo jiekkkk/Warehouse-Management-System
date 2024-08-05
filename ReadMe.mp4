@@ -1,0 +1,19 @@
+# My First Python Django Web Application
+
+Welcome to my first web application built using Python Django as the backend language, and CSS, HTML for the frontend. This project is a result of my learning journey, and I'm excited to share it with you.
+
+## Introduction
+
+This project marks my initial steps into web development using Django for the backend and HTML/CSS for the frontend. Throughout this project, I've learned the fundamentals of creating a web application, handling user authentication, and managing data within the Django framework.
+
+## Learning Resources
+
+I followed a YouTube tutorial series to guide me through the process of building this application. You can find the series [here](https://www.youtube.com/watch?v=mp7fnE45VDM&list=PLInvlTu9nmo8ttdXgiD4S7sHiHL2iRVY5).
+
+## Features
+
+- User Registration and Authentication
+- Profile Management
+- Product Listing and Management
+- Stock Alerts for Low Inventory
+- Dynamic and Responsive UI

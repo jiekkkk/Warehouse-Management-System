@@ -1,0 +1,67 @@
+{% extends 'partials/base.html' %}
+{% block title %} Product Status Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'partials/topnav.html' %}
+<!--Table-->
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-4">
+            <div class="border bg-white p-3">
+                <h4>PO Received</h4>
+                <hr>
+                <form method = "POST" action="">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input class="btn btn-success btn-block" type="submit" value="Add">
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <!-- <th scope="col">#</th> -->
+                        <th scope="col">PO Number</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Date of Receiving PO</th>
+                        <th scope="col">Estimated Date Arrival</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">QTY</th>
+                        <th scope="col">Unit Price</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">DO Number</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <!-- <th scope="row">1</th> -->
+                        <td>{{ product.po_number }}</td>
+                        <td>{{ product.company }}</td>
+                        <td>{{ product.date_of_receiving_po }}</td>
+                        <td>{{ product.estimated_date_arrival }}</td>
+                        <td>{{ product.item }}</td>
+                        <td>{{ product.qty }}</td>
+                        <td>{{ product.unit_price }}</td>
+                        <td>{{ product.total }}</td>
+                        <td>{{ product.do_number }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{% url 'dashboard-product-update' product.id %}">Update</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'dashboard-product-delete' product.id %}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--End Table-->
+
+
+{% endblock %}

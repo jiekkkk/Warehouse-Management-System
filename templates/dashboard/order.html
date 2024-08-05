@@ -1,0 +1,60 @@
+{% extends 'partials/base.html' %}
+{% block title %} Order Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'partials/topnav.html' %}
+<!--Table-->
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-4">
+            <!-- You can add a form here if needed -->
+            <div class="border bg-white p-3">
+                <h4>Orders</h4>
+                <hr>
+                <form method = "POST" action="">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input class="btn btn-success btn-block" type="submit" value="Add">
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <!-- <th scope="col">#</th> -->
+                        <th scope="col">PO Number</th>
+                        <th scope="col">Date Generated</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Unit Price</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for orders in orders %}
+                    <tr>
+                        <td>{{ orders.po_number }}</td>
+                        <td>{{ orders.date_generate }}</td>
+                        <td>{{ orders.client }}</td>
+                        <td>{{ orders.item }}</td>
+                        <td>{{ orders.qty }}</td>
+                        <td>{{ orders.unit_price }}</td>
+                        <td>{{ orders.total }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{% url 'dashboard-order-update' orders.id %}">Update</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'dashboard-order-delete' orders.id %}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--End Table-->
+
+{% endblock %}

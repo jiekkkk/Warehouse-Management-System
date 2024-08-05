@@ -1,0 +1,9 @@
+{% load crispy_forms_field %}
+<form method="{{ form.method }}" class="uniForm {% if form.css_class %}{{ form.css_class }}{% endif %}" {% if form.id %}id="{{ form.id }}"{% endif %} {% crispy_additional_form_attributes form %}>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        {{ field|as_crispy_field }}
+    {% endfor %}
+    {{ form.hidden_fields }}
+</form>

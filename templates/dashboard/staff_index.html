@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4>Stock</h4>
+                </div>
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th scope="col">DO Number</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">QTY</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <!-- if there is do_number = the stock have arrive -->
+                    {% if product.do_number is not None%} 
+                    <tr>
+                        <td>{{ product.do_number }}</td>
+                        <td>{{ product.company }}</td>
+                        <td>{{ product.item }}</td>
+                        <td>{{ product.qty }}</td>
+                        <td>{{ product.description }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

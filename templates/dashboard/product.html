@@ -1,0 +1,71 @@
+{% extends 'partials/base.html' %}
+{% block title %} Warehouse Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'partials/topnav.html' %}
+
+<div class="container">
+    <div class="row my-4">
+        <!-- Alert for low stock -->
+        <div class="col-md-4">
+            {% with low_stock_products=products|dictsort:"qty" %}
+                {% with low_stock_products|slice:":5" as low_stock_products %}
+                    {% if low_stock_products %}
+                        <div class="alert alert-danger">
+                            <h4>Low Stock Alert</h4>
+                            <h8>(stock quantity below 10)</h8>
+                            <ul>
+                                {% for product in low_stock_products %}
+                                    {% if product.qty < 10 %}
+                                        <li>{{ product.item }}<br>
+                                            ({{ product.qty }} left)</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            {% endwith %}
+        </div>
+        <!-- Table -->
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4>Stock</h4>
+                <div class="d-grid gap-2 d-md-block">
+                    <a class="btn btn-info btn-sm" href="{% url 'dashboard-product-status' %}">Before DO</a>
+                </div>
+                </div>
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <!-- <th scope="col">DO Number</th> -->
+                        <th scope="col">Company</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">QTY</th>
+                        <!-- <th scope="col">Description</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <!-- if there is do_number = the stock have arrive -->
+                     <!-- already filter in dashboard_view.py -->
+                    <!-- {% if product.do_number is not None%}  --> 
+                    <tr>
+                        <!-- <td>{{ product.do_number }}</td> -->
+                        <td>{{ product.company }}</td>
+                        <td>{{ product.item }}</td>
+                        <td>{{ product.qty }}</td>
+                        <!-- <td>{{ product.description }}</td> -->
+                    </tr>
+                    <!-- {% endif %} -->
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
